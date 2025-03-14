@@ -55,6 +55,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("Événements de souris activés !");
 });
+function animate() {
+    requestAnimationFrame(animate);
+    // Code pour mettre à jour la simulation
+}
+animate();
+
+
 
 'use strict';
 
