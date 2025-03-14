@@ -9,12 +9,25 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.appendChild(canvas);
     }
 
+    console.log("Canvas chargé:", canvas);
+
+    // Vérifier si WebGL est supporté
+    let gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+    if (!gl) {
+        console.error("WebGL n'est pas supporté par ce navigateur.");
+        alert("WebGL non supporté. Essaye avec un autre navigateur !");
+        return;
+    }
+    console.log("WebGL supporté !");
+
+    // Initialisation Three.js
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
+    // Création d'un effet fluide
     const geometry = new THREE.PlaneGeometry(5, 5, 32, 32);
     const material = new THREE.ShaderMaterial({
         uniforms: { time: { value: 1.0 } },
@@ -24,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const plane = new THREE.Mesh(geometry, material);
     scene.add(plane);
-
     camera.position.z = 2;
 
     function animate() {
