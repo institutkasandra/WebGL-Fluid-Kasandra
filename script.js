@@ -21,6 +21,40 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("WebGL Fluid Simulation Initializing...");
+
+    let canvas = document.getElementById("fluid-canvas");
+    if (!canvas) {
+        console.error("Canvas non trouvé, création...");
+        canvas = document.createElement("canvas");
+        canvas.id = "fluid-canvas";
+        document.body.appendChild(canvas);
+    } else {
+        console.log("Canvas déjà existant, pas besoin de recréer.");
+    }
+
+    console.log("Canvas chargé:", canvas);
+
+    // Vérifier si WebGL est supporté
+    if (!canvas.getContext) {
+        console.error("WebGL non supporté sur ce navigateur.");
+        return;
+    }
+
+    console.log("WebGL supporté, activation des événements...");
+
+    // Activer les événements de souris
+    canvas.addEventListener("mousemove", function (event) {
+        console.log("Mouse moved:", event.clientX, event.clientY);
+    });
+
+    canvas.addEventListener("touchmove", function (event) {
+        console.log("Touch moved:", event.touches[0].clientX, event.touches[0].clientY);
+    });
+
+    console.log("Événements de souris activés !");
+});
 
 'use strict';
 
